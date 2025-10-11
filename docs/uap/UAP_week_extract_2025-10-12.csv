@@ -1,0 +1,6 @@
+"Timestamp","Metric","Value","Category","Module","Source"
+"2025-10-12","Planned","10","Ops","G07","Test"
+"2025-10-12","Completed","8","Ops","G07","Test"
+"2025-10-12","Restore","5","Balance","G26","Test"
+"2025-10-12","Burn","3","Balance","G26","Test"
+"2025-10-12","EthicOK","1","Ethics","C02","Test"
