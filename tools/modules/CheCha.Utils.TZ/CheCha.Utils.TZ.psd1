@@ -1,12 +1,13 @@
 @{
-    RootModule        = 'CheCha.Utils.TZ.psm1'
-    ModuleVersion     = '1.0.0'
-    GUID              = '8d2e6b2a-9d7c-4a4b-b9d2-9e5a3ed0d2e4'
-    Author            = 'С.Ч.'
-    CompanyName       = 'CHECHA CORE / DAO-GOGS'
-    PowerShellVersion = '7.2'
-    FunctionsToExport = @('Get-LocalIsoNow','Get-UtcIsoNow','Convert-TimeZone')
-    AliasesToExport   = @()
-    CmdletsToExport   = @()
-    PrivateData       = @{ PSData = @{ Tags = @('CheCha','Utils','TZ') } }
+  RootModule        = 'CheCha.Utils.TZ.psm1'
+  ModuleVersion     = '1.0.2'
+  GUID              = '2f2a7778-3f30-4a4f-9f02-8d2f1a1b6c33'
+  Author            = 'С.Ч.'
+  CompanyName       = 'CHECHA CORE / DAO-GOGS'
+  PowerShellVersion = '5.1'
+  FunctionsToExport = @('*')
+  AliasesToExport   = @()
+  CmdletsToExport   = @()
+  VariablesToExport = @()
+  PrivateData       = @{}
 }

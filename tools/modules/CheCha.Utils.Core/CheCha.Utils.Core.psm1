@@ -1,13 +1,13 @@
 Set-StrictMode -Version Latest
 
-# ===== Public API (Approved verbs) =====
+# ===== Public API (approved verbs) =====
 function Write-CheChaLog {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory)][string]$Message,
-        [ValidateSet('INFO','OK','WARN','ERR')][string]$Level = 'INFO'
+        [ValidateSet("INFO","OK","WARN","ERR")][string]$Level = "INFO"
     )
-    $ts = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'
+    $ts = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
     Write-Host "[$Level] $ts $Message"
 }
 
@@ -25,14 +25,13 @@ function Resolve-PathSafe {
     try { (Resolve-Path -Path $Path -ErrorAction Stop).ProviderPath } catch { $null }
 }
 
-# ---- one-time dot-source registry for external scripts (fallback helper)
-if (-not (Get-Variable -Name CHECHA_DotSourced -Scope Global -ErrorAction SilentlyContinue)) {
-    $global:CHECHA_DotSourced = @{}
-}
 function Import-ScriptOnce {
     [CmdletBinding()]
     param([Parameter(Mandatory)][string]$Path)
-    $rp = Resolve-PathSafe $Path
+    if (-not (Get-Variable -Name CHECHA_DotSourced -Scope Global -ErrorAction SilentlyContinue)) {
+        $global:CHECHA_DotSourced = @{}
+    }
+    $rp = try { (Resolve-Path -Path $Path -ErrorAction Stop).ProviderPath } catch { $null }
     if (-not $rp) { return $false }
     $key = $rp.ToLowerInvariant()
     if ($global:CHECHA_DotSourced.ContainsKey($key)) { return $true }
@@ -41,7 +40,7 @@ function Import-ScriptOnce {
     return $true
 }
 
-# ===== Back-compat aliases (старі імена) =====
+# ===== Back-compat aliases =====
 Set-Alias -Name Write-Init     -Value Write-CheChaLog
 Set-Alias -Name Ensure-Dir     -Value Initialize-Directory
 Set-Alias -Name Dot-SourceOnce -Value Import-ScriptOnce
