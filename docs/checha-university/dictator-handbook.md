@@ -1,3 +1,8 @@
+---
+title: Dictator's Handbook — CU
+description: CheCha University · CU-PT-DICTATOR-2025-02
+---
+
 # CU Module · Dictator’s Handbook (Bruce Bueno de Mesquita)
 Audience: GOGS core, mentors, cadets
 Outcomes:
@@ -19,3 +24,4 @@ Syllabus (90'):
 Оцінювання:
 - Карта вибірників (1 стор.)
 - Пропозиція реформи стимулів (1 стор.) з ризиками/метриками
+

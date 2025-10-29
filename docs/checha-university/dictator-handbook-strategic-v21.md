@@ -1,3 +1,8 @@
+---
+title: Dictator's Handbook — Strategic v2.1
+description: CheCha University · CU-PT-DICTATOR-2025-02
+---
+
 # Dictator’s Handbook — Strategic Analysis v2.1
 Code: CU-PT-DICTATOR-2025-02 · DAO-URI: dao://CU-PT-DICTATOR-2025-02
 Purpose: Зв'язати елітну динаміку (selectorate/winning coalition) зі сценаріями та сигналами для G43 ITETA.
@@ -34,3 +39,4 @@ Purpose: Зв'язати елітну динаміку (selectorate/winning coal
 - Adoption CU-модуля: сесії/учасники/практикум виконано
 
 © 2025 · CheCha University | DAO-GOGS | С.Ч.
+
