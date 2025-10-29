@@ -1,0 +1,38 @@
+#!/bin/bash
+# Pre-commit verification for CheCha Theme Manifest
+# Abort commit if manifest signature check fails.
+
+ROOT="$(git rev-parse --show-toplevel 2>/dev/null)"
+if [ -z "$ROOT" ]; then
+  echo "❌ Cannot determine repo root."
+  exit 1
+fi
+
+MANIFEST="$ROOT/C07_ANALYTICS/BTD_ThemeRegistry/CheCha_Theme_Manifest_v1.0.yaml"
+TEST="$ROOT/TOOLS/Test-ThemeManifest.ps1"
+
+# If manifest or test script are missing, don't block commit.
+if [ ! -f "$MANIFEST" ] || [ ! -f "$TEST" ]; then
+  exit 0
+fi
+
+# Use pwsh if available, else try powershell
+if command -v pwsh >/dev/null 2>&1; then
+  PS=pwsh
+elif command -v powershell >/dev/null 2>&1; then
+  PS=powershell
+else
+  echo "⚠️  No PowerShell found; skipping theme manifest check."
+  exit 0
+fi
+
+$PS -NoProfile -File "$TEST" -Manifest "$MANIFEST"
+STATUS=$?
+
+if [ $STATUS -ne 0 ]; then
+  echo "❌ Theme Manifest validation failed. Commit aborted."
+  exit $STATUS
+fi
+
+echo "✅ Theme Manifest OK."
+exit 0

@@ -1,0 +1,1 @@
+[![Theme Manifest Verify](https://github.com/checha-dao/documentation-dao-gogs/actions/workflows/theme-verify.yml/badge.svg)](https://github.com/checha-dao/documentation-dao-gogs/actions/workflows/theme-verify.yml)

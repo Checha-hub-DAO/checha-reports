@@ -1,4 +1,5 @@
 ![Last Report](https://img.shields.io/badge/Last%20Report-2025-10-12-blue?style=for-the-badge)
+[![Theme Manifest Verify](https://github.com/checha-dao/documentation-dao-gogs/actions/workflows/theme-verify.yml/badge.svg)](https://github.com/checha-dao/documentation-dao-gogs/actions/workflows/theme-verify.yml)
 
 \# === Generate README.md for checha-reports ===
 

@@ -1,0 +1,55 @@
+name: Theme Manifest Verify
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - "C07_ANALYTICS/BTD_ThemeRegistry/**"
+      - "TOOLS/**"
+      - ".github/workflows/theme-verify.yml"
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - "C07_ANALYTICS/BTD_ThemeRegistry/**"
+      - "TOOLS/**"
+      - ".github/workflows/theme-verify.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup PowerShell
+        uses: PowerShell/PowerShell@v1
+
+      - name: Rebuild DigitalSignature + Verification (optional)
+        shell: pwsh
+        run: |
+          $manifest = Join-Path $env:GITHUB_WORKSPACE 'C07_ANALYTICS/BTD_ThemeRegistry/CheCha_Theme_Manifest_v1.0.yaml'
+          $build    = Join-Path $env:GITHUB_WORKSPACE 'TOOLS/Build-ThemeManifestHash.ps1'
+          if (Test-Path $build -PathType Leaf) {
+            pwsh -NoProfile -ExecutionPolicy Bypass `
+              -File $build `
+              -ManifestPath $manifest `
+              -ExtraSearchDirs (Join-Path $env:GITHUB_WORKSPACE 'TOOLS');(Join-Path $env:GITHUB_WORKSPACE 'TOOLS/styles') `
+              -IncludeExt '.css,.ps1,.yaml,.yml' `
+              -Backup -Verbose
+          } else {
+            Write-Host 'Build script not present, skipping rebuild.'
+          }
+
+      - name: Verify manifest integrity
+        shell: pwsh
+        run: |
+          $manifest = Join-Path $env:GITHUB_WORKSPACE 'C07_ANALYTICS/BTD_ThemeRegistry/CheCha_Theme_Manifest_v1.0.yaml'
+          $test     = Join-Path $env:GITHUB_WORKSPACE 'TOOLS/Test-ThemeManifest.ps1'
+          if (-not (Test-Path $manifest -PathType Leaf)) { throw "Manifest not found: $manifest" }
+          if (-not (Test-Path $test -PathType Leaf))     { throw "Test script not found: $test" }
+          pwsh -NoProfile -File $test -Manifest $manifest
