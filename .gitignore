@@ -1,0 +1,3 @@
+# Ignore local ethics runner logs
+EthicalCheck_task.log
+**/EthicalCheck_task.log
